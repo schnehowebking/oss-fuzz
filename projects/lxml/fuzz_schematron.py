@@ -19,13 +19,14 @@ import sys
 
 import io
 from lxml import etree as et
+import lxml.etree
 
 
 def TestOneInput(data):
   """Targets Schematron. Currently validates, but we should add more APIs"""
   try:
-    schema_raw = et.parse(io.BytesIO(data))
-    valid_tree = et.parse(io.BytesIO(b'<AAA><BBB/><CCC/></AAA>'))
+    schema_raw = et.parse(io.BytesIO(data), parser=lxml.etree.XMLParser(resolve_entities=False))
+    valid_tree = et.parse(io.BytesIO(b'<AAA><BBB/><CCC/></AAA>'), parser=lxml.etree.XMLParser(resolve_entities=False))
     
     schema = et.Schematron(schema_raw)
     schame.validate(valid_tree)
