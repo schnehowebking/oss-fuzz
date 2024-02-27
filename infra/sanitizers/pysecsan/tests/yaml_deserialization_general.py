@@ -23,7 +23,7 @@ import pysecsan
 def serialize_with_tainted_data(param):
   """Hit insecure yaml function."""
   try:
-    yaml.load(param, yaml.Loader)
+    yaml.load(param, yaml.SafeLoader)
   except yaml.YAMLError:
     pass
 

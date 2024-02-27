@@ -24,12 +24,12 @@ def serialize_with_tainted_data(param, magicval):
   """Pass data to insecure yaml functions."""
   if magicval == 1337:
     try:
-      yaml.load(param, yaml.Loader)
+      yaml.load(param, yaml.SafeLoader)
     except yaml.YAMLError:
       pass
   elif magicval == 1338:
     try:
-      yaml.load('FROMFUZZ', yaml.Loader)
+      yaml.load('FROMFUZZ', yaml.SafeLoader)
     except yaml.YAMLError:
       pass
 
