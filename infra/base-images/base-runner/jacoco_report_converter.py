@@ -19,7 +19,7 @@ report."""
 import json
 import os
 import sys
-import xml.etree.ElementTree as ET
+import defusedxml.ElementTree
 
 
 def convert(xml):
@@ -33,7 +33,7 @@ def convert(xml):
       }],
   }
 
-  report = ET.fromstring(xml)
+  report = defusedxml.ElementTree.fromstring(xml)
   totals = make_element_summary(report)
   summary['data'][0]['totals'] = totals
 
